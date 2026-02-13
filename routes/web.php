@@ -9,3 +9,4 @@ Route::get('/autocomplete-peserta', [App\Http\Controllers\PesertaController::cla
 Route::get('/fill-kabupaten', [App\Http\Controllers\PesertaController::class, 'fillkabupaten'])->name('peserta.fillkabupaten');
 
 Route::get('/data-presensi', [App\Http\Controllers\DataPresensiController::class, 'index'])->name('data.presensi.index');
+Route::get('/data-peserta', [App\Http\Controllers\DataPesertaController::class, 'index'])->name('data.peserta.index');

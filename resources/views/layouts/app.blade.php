@@ -34,7 +34,19 @@
                     <li class="nav-item">
                         <a class="nav-link {{ request()->routeIs('presensi.index') ? 'active' : '' }}"
                             href="{{ route('presensi.index') }}">
-                            <i class="fas fa-list"></i> Data Presensi
+                            Scan QR
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('data.presensi.index') ? 'active' : '' }}"
+                            href="{{ route('data.presensi.index') }}">
+                            Data Presensi
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->routeIs('data.peserta.index') ? 'active' : '' }}"
+                            href="{{ route('data.peserta.index') }}">
+                            Data Peserta
                         </a>
                     </li>
                     {{-- <li class="nav-item">

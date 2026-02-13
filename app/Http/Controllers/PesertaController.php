@@ -43,8 +43,6 @@ class PesertaController extends Controller
 
         $pesertas = Peserta::whereNull('kabupaten')->get();
 
-        dd($pesertas);
-
         foreach ($pesertas as $peserta) {
             foreach ($kabupatenList as $kabupaten) {
                 if (stripos($peserta->satker, $kabupaten) !== false) {

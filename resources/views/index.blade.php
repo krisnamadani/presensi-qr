@@ -45,20 +45,27 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-success">
         <div class="container">
-            <a class="navbar-brand d-flex align-items-center gap-3 mb-2" href="#">
+            <a class="navbar-brand d-flex align-items-center gap-3 mb-2" href="{{ route('data.presensi.index') }}">
                 <img src="{{ asset('kemenag.png') }}" alt="Logo 1" height="40">
                 <img src="{{ asset('pusaka.png') }}" alt="Logo 2" height="40">
             </a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav mx-auto">
                     <li class="nav-item">
-                        <a class="nav-link active" href="{{ route('presensi.index') }}?sesi=Pembukaan">Pembukaan</a>
+                        <a class="nav-link {{ request()->get('sesi') == 'Registrasi' ? 'active' : '' }}"
+                            href="{{ route('presensi.index') }}?sesi=Registrasi">Registrasi</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('presensi.index') }}?sesi=Sesi%20Siang">Sesi Siang</a>
+                        <a class="nav-link {{ request()->get('sesi') == 'Pembukaan' ? 'active' : '' }}"
+                            href="{{ route('presensi.index') }}?sesi=Pembukaan">Pembukaan</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('presensi.index') }}?sesi=Sesi%20Malam">Sesi Malam</a>
+                        <a class="nav-link {{ request()->get('sesi') == 'Sesi Siang' ? 'active' : '' }}"
+                            href="{{ route('presensi.index') }}?sesi=Sesi%20Siang">Sesi Siang</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link {{ request()->get('sesi') == 'Sesi Malam' ? 'active' : '' }}"
+                            href="{{ route('presensi.index') }}?sesi=Sesi%20Malam">Sesi Malam</a>
                     </li>
                 </ul>
             </div>
@@ -120,6 +127,7 @@
                     $('#response').html(
                         `<div class="alert alert-success" role="alert">${response.message}</div>`
                     );
+                    beep(200, 1000, 0.5);
                 },
                 error: function(xhr, status, error) {
                     $('#nip').val("");
@@ -127,11 +135,13 @@
                         const json = $.parseJSON(xhr.responseText)
                         $('#response').html(
                             `<div class="alert alert-success" role="alert">${json.message}</div>`);
+                        beep(200, 1000, 0.5);
                     } else {
                         const json = $.parseJSON(xhr.responseText)
                         $('#response').html(
                             `<div class="alert alert-success" role="alert">${json.message}</div>`
                         );
+                        beep(200, 1000, 0.5);
                     }
                 }
             });
@@ -280,6 +290,26 @@
             // autofocus to input
             input.focus();
         });
+    </script>
+
+    <script>
+        function beep(duration = 200, frequency = 800, volume = 1) {
+            const audioCtx = new(window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioCtx.createOscillator();
+            const gainNode = audioCtx.createGain();
+
+            oscillator.connect(gainNode);
+            gainNode.connect(audioCtx.destination);
+
+            oscillator.frequency.value = frequency;
+            gainNode.gain.value = volume;
+
+            oscillator.start();
+
+            setTimeout(() => {
+                oscillator.stop();
+            }, duration);
+        }
     </script>
 </body>
 
