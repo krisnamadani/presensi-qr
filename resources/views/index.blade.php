@@ -126,11 +126,11 @@
                     if (status < 500) {
                         const json = $.parseJSON(xhr.responseText)
                         $('#response').html(
-                            `<div class="alert alert-danger" role="alert">${json.message}</div>`);
+                            `<div class="alert alert-success" role="alert">${json.message}</div>`);
                     } else {
                         const json = $.parseJSON(xhr.responseText)
                         $('#response').html(
-                            `<div class="alert alert-danger" role="alert">${json.message}</div>`
+                            `<div class="alert alert-success" role="alert">${json.message}</div>`
                         );
                     }
                 }
